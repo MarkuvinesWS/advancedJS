@@ -27,6 +27,8 @@
     border: 4px dashed dodgerblue;
     border-radius: 8px;
     transition: border 400ms;
+    background-size: cover;
+    background-position: center;
 }
 
 #DnDContainer:hover {
@@ -35,4 +37,8 @@
 
 button {
     cursor: pointer;
+}
+
+.file-input {
+  display: none;
 }
