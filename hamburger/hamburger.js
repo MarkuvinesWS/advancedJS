@@ -1,35 +1,52 @@
+/* FIXME сделай через перечисления и карты
+    const HamburgerSize = {
+      SMALL = "SMALL",
+      LARGE = "LARGE"
+    };
+    const hamburgerSizeAndPropertiesMap = {
+     [HamburgerSize.SMALL]: { price:50, calories: 20 },
+     [HamburgerSize.LARGE]: { price:100, calories: 40 },
+    };
+    остальные свойства аналогично
+ */
 const SIZE_SMALL = {
   size: 'small',
   type: 'size',
   price: 50,
   cal: 20,
 };
+// FIXME отступ
 const SIZE_LARGE = {
   size: 'large',
   type: 'size',
   price: 100,
   cal: 40,
 }
+// FIXME отступ
 const STUFFING_CHEESE = {
   type: 'stuffing',
   price: 10,
   cal: 20,
 }
+// FIXME отступ
 const STUFFING_SALAD = {
   type: 'stuffing',
   price: 20,
   cal: 5,
 }
+// FIXME отступ
 const STUFFING_POTATO = {
   type: 'stuffing',
   price: 15,
   cal: 10,
 }
+// FIXME отступ
 const TOPPING_MAYO = {
   type: 'topping',
   price: 20,
   cal: 5,
 }
+// FIXME отступ
 const TOPPING_SPICE = {
   type: 'topping',
   price: 15,
@@ -44,33 +61,37 @@ class HamburgerException extends Error{
 
 class Hamburger {
   constructor(size, stuffing) {
-    if ( !stuffing ) throw new HamburgerException('no stuffing given');
-    if ( !size ) throw new HamburgerException('no size given');
-    if ( stuffing.type !== 'stuffing' ) throw new HamburgerException('invalid stuffing');
-    if ( size.type !== 'size' ) throw new HamburgerException('invalid size');
+    // FIXME логичнее проверять сначала size, а потом stuffing. Соблюдаем порядок аргументов заданный в сигнатуре функции
+    if ( !stuffing ) throw new HamburgerException('no stuffing given'); // FIXME лишние отступы ( ... )
+    if ( !size ) throw new HamburgerException('no size given'); // FIXME лишние отступы ( ... )
+    if ( stuffing.type !== 'stuffing' ) throw new HamburgerException('invalid stuffing'); // FIXME лишние отступы ( ... )
+    if ( size.type !== 'size' ) throw new HamburgerException('invalid size'); // FIXME лишние отступы ( ... )
     this.size = size;
     this.stuffing = stuffing;
     this.toppings = [];
   }
 
-  addTopping( topping ) {
+  addTopping( topping ) { // FIXME лишние отступы ( ... )
     if (topping.type !== 'topping') throw new HamburgerException('invalid topping');
     if (this.toppings.includes(topping)) throw new HamburgerException(`such topping is already exist`);
     this.toppings.push( topping );
   }
 
-  removeTopping( topping ) {
+  removeTopping( topping ) { // FIXME лишние отступы ( ... )
     if (topping.type !== 'topping') throw new HamburgerException('invalid topping');
     if (!this.toppings.includes( topping )) throw new HamburgerException('no such topping');
     const indexOfTargetTopping = this.toppings.indexOf( topping );
     this.toppings.splice( indexOfTargetTopping, 1 );
   }
-  getToppings() {
+  // FIXME отступ
+  getToppings() {  // FIXME make getter
     return this.toppings;
   }
-  getSize() {
+  // FIXME отступ
+  getSize() {  // FIXME make getter
     return this.size.size;
   }
+  // FIXME отступ
   calculatePrice() {
     let toppingsPrice = 0;
     for (const { price } of this.toppings) {
@@ -78,6 +99,7 @@ class Hamburger {
     }
     return this.size.price + this.stuffing.price + toppingsPrice
   }
+  // FIXME отступ
   calculateCalories () {
     let toppingsCalories = 0;
     for (const { cal } of this.toppings) {
@@ -87,11 +109,17 @@ class Hamburger {
   }
 }
 
-const hamburger = new Hamburger( SIZE_SMALL, STUFFING_SALAD );
+const INVALID_SIZE = {
+  type: 'size',
+}
+
+const hamburger = new Hamburger( INVALID_SIZE, STUFFING_SALAD ); // FIXME лишние отступы ( ... )
 console.log(hamburger);
+// FIXME отступ
 hamburger.addTopping( TOPPING_SPICE );
 hamburger.addTopping( TOPPING_MAYO );
 console.log(hamburger);
+// FIXME отступ
 hamburger.removeTopping(TOPPING_SPICE);
 console.log(hamburger);
 console.log(hamburger.getToppings());
