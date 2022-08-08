@@ -42,8 +42,8 @@ document.querySelector('.squaresBlock').addEventListener('scroll', () => {
 
   firstSquare.style.top = `${ innerTopGap }px`;
   secondSquare.style.top = `${ innerTopGap * speedCoefficient}px`;
-  thirdSquare.style.top =  `${ innerTopGap }px`;
-  fourthSquare.style.top = `${ innerTopGap * speedCoefficient}px`;
+  thirdSquare.style.top =  `${ innerTopGap * speedCoefficient  * speedCoefficient }px`;
+  fourthSquare.style.top = `${ innerTopGap * speedCoefficient  * speedCoefficient  * speedCoefficient}px`;
 })
 
 function setBackgroundImage(targetSquare, image) {
