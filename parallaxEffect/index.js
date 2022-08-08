@@ -1,37 +1,61 @@
 const firstSquare = document.querySelector('#firstSquare');
 const secondSquare = document.querySelector('#secondSquare');
+const thirdSquare = document.querySelector('#thirdSquare');
+const fourthSquare = document.querySelector('#fourthSquare');
 const radioButtons = document.querySelectorAll('input[name=squareId]');
 const fileInput = document.querySelector('input[type=file]');
 const squaresBlock = document.querySelector('.squaresBlock');
+const dict = {
+  'firstSquare': {
+    element: firstSquare,
+    styles: {
+      "background-size": '25%',
+    }
+  } ,
+  'secondSquare': {
+    element: secondSquare,
+    styles: {
+      "background-size": '15%',
+    }
+  } ,
+  'thirdSquare': {
+    element: thirdSquare,
+    styles: {
+      "background-size": '100%',
+    }
+  } ,
+  'fourthSquare': {
+    element: fourthSquare,
+    styles: {
+      "background-size": '75%',
+    }
+  } ,
+}
 
 const squaresBlockInnerAvailableHeight = squaresBlock.offsetHeight - firstSquare.offsetHeight
 const squaresBlockOuterAvailableHeight = squaresBlock.scrollHeight - squaresBlock.offsetHeight;
 const heightsRatio = squaresBlockInnerAvailableHeight / squaresBlockOuterAvailableHeight;
 
 document.querySelector('.squaresBlock').addEventListener('scroll', () => {
-  // FIXME лишний отступ
   let innerTopGap = squaresBlock.scrollTop * heightsRatio;
   let speedCoefficient = squaresBlock.scrollTop / squaresBlockOuterAvailableHeight;
 
   firstSquare.style.top = `${ innerTopGap }px`;
   secondSquare.style.top = `${ innerTopGap * speedCoefficient}px`;
+  thirdSquare.style.top =  `${ innerTopGap }px`;
+  fourthSquare.style.top = `${ innerTopGap * speedCoefficient}px`;
 })
 
-// FIXME не чистая функция
 function setBackgroundImage(targetSquare, image) {
   const img =  window.URL.createObjectURL(image);
-  targetSquare.style.backgroundImage = `url(${img})`;
+  dict[targetSquare].element.style.backgroundImage = `url(${img})`;
+  const dictKeys = Object.keys(dict[targetSquare].styles);
+  dictKeys.map( key =>  dict[targetSquare].element.style[key] = `${dict[targetSquare].styles[key]}`)
 }
 
-fileInput.addEventListener('change', (e) => {
-  for (const radioButton of radioButtons) {
-    if (radioButton.checked) {
-      // FIXME добавь еще 2 квадрата и 2 инпута, при этом background-size у первого должен быть 25%, у второго 15%, у третьего 100%, а у четвертого 75%
-      switch (radioButton.value) {
-        case ('firstSquare') : setBackgroundImage(firstSquare, e.target.files[0]); break
-        case ('secondSquare') : setBackgroundImage(secondSquare, e.target.files[0]); break
-      }
-    }
-  }
-
+fileInput.addEventListener('change', (event) => {
+  const radioButtonsArray = [...radioButtons];
+  radioButtonsArray.map((radioButton) => {
+    if (radioButton.checked) setBackgroundImage(radioButton.value, event.target.files[0])
+  })
 });

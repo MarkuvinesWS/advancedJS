@@ -30,17 +30,27 @@
 }
 
 #firstSquare,
-#secondSquare {
+#secondSquare,
+#thirdSquare,
+#fourthSquare {
     position: absolute;
     top: 0;
     left: 0;
     width: 100px;
     height: 100px;
     background: red;
-    background-size: cover;
+    /*background-size: cover;*/
     background-position: center;
 }
 
 #secondSquare {
     left: 125px;
+}
+
+#thirdSquare {
+  left: 250px;
+}
+
+#fourthSquare {
+  left: 375px;
 }
